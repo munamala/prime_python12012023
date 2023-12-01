@@ -1,7 +1,7 @@
 # Program to check if a number is prime or not
 from flask import Flask, request, render_template_string, session
 app = Flask(__name__)
-num = 29
+#num = 29
 
 # To take input from the user
 #num = int(input("Enter a number: "))
@@ -11,7 +11,8 @@ num = 29
 @app.route('/', methods=['GET', 'POST'])
 def prime_value():
     flag = False
-
+    if request.method == 'POST':
+        num = int(request.form['guess'])
     if num == 1:
         print(num, "is not a prime number")
     elif num > 1:
@@ -25,9 +26,11 @@ def prime_value():
 
         # check if flag is True
         if flag:
-            print(num, "is not a prime number")
+            message = 'Not a prime number... The number was ' + str(session['number'])
+            #print(num, "is not a prime number")
         else:
-            print(num, "is a prime number")
+            message = 'Is a Prime number... The number was ' + str(session['number'])
+            #print(num, "is a prime number")
     return render_template_string('''
         <html>
             <body>
