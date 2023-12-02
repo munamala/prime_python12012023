@@ -20,5 +20,9 @@ steps:
   displayName: 'Use Python $(python.version)'
 
 - script: |
+    python -m venv antenv
+    source antenv/bin/activate
+    python -m pip install --upgrade pip
+    pip install -r requirements.txt
     python3 prime_check.py
   displayName: 'pytestaviapp'
